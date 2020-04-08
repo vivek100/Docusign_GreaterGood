@@ -1,4 +1,4 @@
-const db  = require('/app/models/store');
+const db  = require('/app/models/store.js');
 
 
 

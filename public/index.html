@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>HelpNearMe</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+  <!-- Firebase Login logic-->
+      <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+  
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+  
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+  
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/css/mdb.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+
+
+      .controls {
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        height: 29px;
+        margin-left: 17px;
+        margin-top: 10px;
+        outline: none;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 200px;
+      }
+
+      .controls:focus {
+        border-color: #4d90fe;
+      }
+      .maptitle {
+        font-weight: bold;
+      }
+      #infowindow-content {
+        display: none;
+      }
+      #map #infowindow-content {
+        display: block;
+      }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: Appland - v2.0.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-app-landing-page-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex">
+
+      <div class="logo mr-auto">
+        <h1 class="text-light"><a href="index.html">HelpNearMe</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <!--<li class="active"><a href="#header">Home</a></li>-->
+          <li><a href="#details" id='register'>Register Your Help</a></li>
+          <li><a href="#gallery" id='helps'>My Helps</a></li>
+          <li><a href="#features">How it works?</a></li>
+          <li class="get-started" ><a href="#header" id="signin" data-toggle="modal" data-target="#elegantModalForm">Sign in/Sign Up</a></li>
+          <!-- <li><a href="#contact" id='singup'>Sign Up</a></li> -->
+          <li class="get-started" ><a href="#gallery" id="profile" style="display: none"></a></li>
+          <li class="get-started" ><a id="signout" style="display: none">Sign Out</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+          
+        <div class="col-lg-3 d-lg-flex flex-lg-column content-center align-items-stretch" data-aos="fade-up">
+          <div>
+            <h2>Find all the helping hands near you.</h2>
+          </div>
+        </div>
+        <div class="col-lg-3 d-lg-flex flex-lg-column content-center align-items-stretch " data-aos="fade-up">
+            <div>   
+              <input type="text" style="margin-bottom: 1em" id='Zipcode'class="form-control" pattern="[0-9]{6}" value='Enter Zip Code' title="Six digit zip code"> </input>  
+            </div>
+          </div>
+          <div class="col-lg-3 d-lg-flex flex-lg-column content-center align-items-stretch " data-aos="fade-up">
+              <div>
+                  <select id="Searchtype" style="margin-bottom: 1em" class="form-control">
+                    <option selected disabled hidden>Select help type</option>
+                    <option value="All">All</option>
+                    <option value="Food Packet">Food Packets</option>
+                    <option value="Shelter" >Shelter</option>
+                    <option value="Help Strays">Help Strays</option>
+                  </select>
+              </div>
+          </div>
+          <div class="col-lg-3 d-lg-flex flex-lg-column content-center align-items-stretch " data-aos="fade-up">
+          <div>
+                <div class="d-flex justify-content-center" style="margin-bottom: 1em" ><a href="#" id='search' class="download-btn"><i class="bx bx-search"></i> Search</a>
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          
+          <div class="col-lg-3 d-lg-flex flex-lg-column content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+              <div class="list-group">
+                  <a href="#!" class="list-group-item list-group-item-action" style="background: #5777ba;color: white">
+                    Helps in your area
+                  </a>
+              </div>
+          </div>
+          <div style="min-height:300px" class="col-lg-9 d-lg-flex flex-lg-column align-items-stretch pt-lg-0 order-1 order-lg-2" data-aos="fade-up">
+            <div id="map-container-google-1" class="z-depth-1-half map-container" >
+
+            </div>
+                
+          </div>
+        </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= App Features Section ======= -->
+    <section id="features" class="features">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>How it works?</h2>
+          <p>Need to update this content :(.</p>
+        </div>
+
+        <div class="row no-gutters">
+          <div class="col-xl-7 d-flex align-items-stretch order-2 order-lg-1">
+            <div class="content d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-md-6 icon-box" data-aos="fade-up">
+                  <i class="bx bx-receipt"></i>
+                  <h4>Corporis voluptates sit</h4>
+                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                </div>
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+                  <i class="bx bx-cube-alt"></i>
+                  <h4>Ullamco laboris nisi</h4>
+                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                </div>
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                  <i class="bx bx-images"></i>
+                  <h4>Labore consequatur</h4>
+                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                </div>
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                  <i class="bx bx-shield"></i>
+                  <h4>Beatae veritatis</h4>
+                  <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                </div>
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+                  <i class="bx bx-atom"></i>
+                  <h4>Molestiae dolor</h4>
+                  <p>Et fuga et deserunt et enim. Dolorem architecto ratione tensa raptor marte</p>
+                </div>
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
+                  <i class="bx bx-id-card"></i>
+                  <h4>Explicabo consectetur</h4>
+                  <p>Est autem dicta beatae suscipit. Sint veritatis et sit quasi ab aut inventore</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="image col-xl-5 d-flex align-items-stretch justify-content-center order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <img src="assets/img/features.svg" class="img-fluid" alt="">
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End App Features Section -->
+
+    <!-- ======= Create new Help Section ======= -->
+    <section id="details" class="details" style="padding-top: 20px;">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="margin-bottom:0px">Put your help on the map</h2>
+                <p>In this section you can create a new help and we will add it on the map, so people in your area can discover you and join you in your noble cause.</p>
+                <button class="btn btn-red" type="button" style="display: block;" id="errorVerify" >Please log in or verify your email before creating a new help from the profile section.</button>
+                <button class="btn btn-red" type="button" style="display: block;" id="dataVerify">Please update your bio and phonenumber before creating a new help from the profile section.</button>
+              </div>
+          <form id="userdata" style="display: none;">
+          <div class="row content">
+            <div class="col-lg-6 d-lg-flex flex-lg-column content-center align-items-stretch" data-aos="fade-up">
+              <div class="md-form" style="margin-top: 0rem;margin-bottom: 1rem">
+                <i class="fas fa-heading prefix grey-text"></i>
+                <input type="text" id="form1" class="form-control" data-toggle="tooltip" title="For example: Helping Strays in Vijaygram Colony" minlength="10" required>
+                <label for="form1">Title:</label>
+              </div>
+              <div class="md-form" style="margin-top: 0rem;margin-bottom: 1rem">
+                <i class="fas fa-pencil-alt prefix grey-text"></i>
+                <textarea id="form2" class="md-textarea form-control" rows="5" minlength="10" required data-toggle="tooltip" title='Here you can add details what exactly you plan to do, execution plan, timings, what help you require from other people and details on what area you want to cover etc.'></textarea>
+                <label for="form2" >Description: </label>
+              </div>
+              <div class="md-form" style="margin-top: 0rem;margin-bottom: 1rem">
+                  <i class="fas fa-phone-square prefix grey-text"></i>
+                  <input type="number" id="form3" class="form-control" data-toggle="tooltip" minlength="10" maxlength="10" required title="Contact of the person handling this help">
+                  <label for="form3">Contact Number:</label>
+              </div>
+              <div class="md-form" style="margin-top: 0rem;margin-bottom: 1rem">
+                  <i class="fas fa-link prefix grey-text"></i>
+                  <input type="text" id="form4" class="form-control"/>
+                  <label for="form4">Photo URL link of posters if any</label>
+              </div>  
+            </div>
+            <div class="col-lg-6 d-lg-flex flex-lg-column content-center align-items-stretch" data-aos="fade-up">
+
+              <div class="md-form" style="margin-top: 0.7rem;margin-bottom: 1rem">
+                  <i class="far fa-calendar prefix grey-text"></i>
+                  <input type="date" id="prefill" name="enddate" class="form-control"/ required>
+                  <label for="prefill">Enter till when you plan to run your help.</label>
+              </div>
+              <div style="display: none">
+                    <input id="pac-input"
+                           class="controls"
+                           type="text"
+                           placeholder="Enter the location of help" required>
+              </div>
+              <div id="map" style="min-height:250px"  data-toggle="tooltip" title="This is the location where your help will be shown on the map."></div>
+              <div id="infowindow-content">
+                    <span id="place-name"  class="maptitle"></span><br>
+                    <strong>Place ID</strong>: <span id="place-id"></span><br>
+                    <span id="place-address"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row content  justify-content-md-center" style="margin-top: 0px">
+              <button class="btn btn-info d-flex" id="saveNewHelp" >Save</button>
+          </div>
+            
+
+          </form>
+        </div>
+      </section>
+      <!-- End Create new Help Section -->
+    <!-- ======= My Profile Section ======= -->
+    <section id="gallery" class="gallery" style="padding-top: 20px;display:none">
+      <div class="container">
+          <div class="section-title">
+              <h2 style="margin-bottom:0px">My Profile</h2>
+              <p>You can update bio,photo and contact number here. This info will be shown to userw when you create a new help.</p>
+            </div>
+        <form id= "mydata">
+        <div class="row content">
+          <div class="col-lg-6 d-lg-flex flex-lg-column content-center align-items-stretch" data-aos="fade-up">
+            <div class="md-form">
+              <i class="fas fa-user prefix grey-text"></i>
+              <input type="text" readonly id="form104" class="form-control"/>
+              <label for="form104" class="active" style="transform: translateY(-14px) scale(0.8);">Your Name</label>
+            </div>
+            <div class="md-form" style="margin-bottom: 0px">
+              <i class="fas fa-pencil-alt prefix grey-text"></i>
+              <textarea id="form10" class="md-textarea form-control" minlength="10" rows="5" required></textarea>
+              <label for="form10"id="bioLabel">Your Bio</label>
+            </div>
+            <div class="md-form">
+                  <i style="padding-top: 5px" class="fas fa-envelope prefix green-text"></i>
+                  <label id="verify" style="padding-left: 5px">Email Verified</label>
+                  <button class="btn btn-grey float-right disabled" type="button"  id="verifyButton" onclick="sendEmailVerification()" >Verify</button>
+            </div>
+
+          </div>
+          <div class="col-lg-6 d-lg-flex flex-lg-column content-center align-items-stretch" data-aos="fade-up">
+            <div>
+              <img src="assets/img/testimonials/testimonials-1.jpg" id="profilepic"alt="thumbnail" class="img-thumbnail" style="width: 140px;display: block;margin-left: auto;margin-right: auto;">
+            </div>  
+            <div class="md-form">
+                <i class="fas fa-link prefix grey-text"></i>
+                <input type="text" id="form12" class="form-control" required/>
+                <label for="form12" style="transform: translateY(-14px) scale(0.8);">Update Photo URL</label>
+            </div>
+            <div class="md-form">
+                <i class="fas fa-phone-squareprefix grey-text"></i>
+                <input type="number" id="form13" class="form-control" minlength="10" maxlength="10" required/>
+                <label for="form13">Phone Number</label>
+            </div>
+          </div>
+        </div>
+        <div class="row content justify-content-md-center">
+          <button class="btn btn-info d-flex content-center" id="saveuser" type="submit" >Save</button>
+        </div>
+        </form>
+      </div>
+    </section><!-- End Profile Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Testimonials</h2>
+          <p>If people write new things about us.</p>
+        </div>
+
+        <div class="owl-carousel testimonials-carousel" data-aos="fade-up">
+
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+              <h3>Saul Goodman</h3>
+              <h4>Ceo &amp; Founder</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+              <h3>Sara Wilsson</h3>
+              <h4>Designer</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+              <h3>Jena Karlis</h3>
+              <h4>Store Owner</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+              <h3>Matt Brandon</h3>
+              <h4>Freelancer</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+              <h3>John Larson</h3>
+              <h4>Entrepreneur</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing" style="display: none">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Pricing</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row no-gutters">
+
+          <div class="col-lg-4 box" data-aos="fade-right">
+            <h3>Free</h3>
+            <h4>$0<span>per month</span></h4>
+            <ul>
+              <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
+              <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
+              <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
+              <li class="na"><i class="bx bx-x"></i> <span>Pharetra massa massa ultricies</span></li>
+              <li class="na"><i class="bx bx-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+            </ul>
+            <a href="#" class="get-started-btn">Get Started</a>
+          </div>
+
+          <div class="col-lg-4 box featured" data-aos="fade-up">
+            <h3>Business</h3>
+            <h4>$29<span>per month</span></h4>
+            <ul>
+              <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
+              <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
+              <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
+              <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
+              <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
+            </ul>
+            <a href="#" class="get-started-btn">Get Started</a>
+          </div>
+
+          <div class="col-lg-4 box" data-aos="fade-left">
+            <h3>Developer</h3>
+            <h4>$49<span>per month</span></h4>
+            <ul>
+              <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
+              <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
+              <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
+              <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
+              <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
+            </ul>
+            <a href="#" class="get-started-btn">Get Started</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container">
+
+        <div class="section-title">
+
+          <h2>Frequently Asked Questions</h2>
+          <p>Need to update this too if needed</p>
+        </div>
+
+        <div class="accordion-list">
+          <ul>
+            <li data-aos="fade-up">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" class="collapse" href="#accordion-list-1">Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="accordion-list-1" class="collapse show" data-parent=".accordion-list">
+                <p>
+                  Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#accordion-list-2" class="collapsed">Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="accordion-list-2" class="collapse" data-parent=".accordion-list">
+                <p>
+                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#accordion-list-3" class="collapsed">Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="accordion-list-3" class="collapse" data-parent=".accordion-list">
+                <p>
+                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="300">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#accordion-list-4" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="accordion-list-4" class="collapse" data-parent=".accordion-list">
+                <p>
+                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="400">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#accordion-list-5" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="accordion-list-5" class="collapse" data-parent=".accordion-list">
+                <p>
+                  Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact" style="display: none">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-6 info" data-aos="fade-up">
+                <i class="bx bx-map"></i>
+                <h4>Address</h4>
+                <p>A108 Adam Street,<br>New York, NY 535022</p>
+              </div>
+              <div class="col-lg-6 info" data-aos="fade-up" data-aos-delay="100">
+                <i class="bx bx-phone"></i>
+                <h4>Call Us</h4>
+                <p>+1 5589 55488 55<br>+1 5589 22548 64</p>
+              </div>
+              <div class="col-lg-6 info" data-aos="fade-up" data-aos-delay="200">
+                <i class="bx bx-envelope"></i>
+                <h4>Email Us</h4>
+                <p>contact@example.com<br>info@example.com</p>
+              </div>
+              <div class="col-lg-6 info" data-aos="fade-up" data-aos-delay="300">
+                <i class="bx bx-time-five"></i>
+                <h4>Working Hours</h4>
+                <p>Mon - Fri: 9AM to 5PM<br>Sunday: 9AM to 1PM</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form" data-aos="fade-up">
+              <div class="form-group">
+                <input placeholder="Your Name" type="text" name="name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input placeholder="Your Email" type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input placeholder="Subject" type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <textarea placeholder="Message" class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+                <div class="validate"></div>
+              </div>
+              <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-newsletter" data-aos="fade-up">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <h4>Join Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact" data-aos="fade-up">
+            <h3>Appland</h3>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br><br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="100">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="200">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="300">
+            <h4>Our Social Networks</h4>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Appland</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-app-landing-page-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+  <!-- Login Code-->
+<!-- Modal -->
+<div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Log in /Sign Up</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+            <div id="firebaseui-spa">
+                <div id="firebaseui-container"></div>
+              </div>
+  
+        </div>
+  
+      </div>
+    </div>
+</div>
+<!-- Modal -->
+<!-- Sign Up -->
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Log in /Sign Up</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+          <div id="firebaseui-spa">
+              <div id="firebaseui-container"></div>
+            </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+  
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/js/mdb.min.js"></script>
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="js/app.js" defer></script>
+  <!-- Google Maps-->
+     <script>
+        var map2;
+        window.addressData;
+        window.place;
+
+        function initMap() {
+          map2 = new google.maps.Map(document.getElementById('map-container-google-1'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 7
+          });
+          var infoWindow2 = new google.maps.InfoWindow;
+          // Try HTML5 geolocation.
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+
+              infoWindow2.setPosition(pos);
+              infoWindow2.setContent('Enter your zip code above to find help around you!');
+              infoWindow2.open(map2);
+              map2.setCenter(pos);
+            }, function() {
+              handleLocationError(true, infoWindow2, map2.getCenter());
+            });
+          } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow2, map2.getCenter());
+          }
+          //get data based on zip code
+          $(function () {
+            $('#search').on('click', async function (e) {
+              e.preventDefault();
+              const zip = $("#Zipcode");
+                  if (zip.val().length !== 6) {
+                    alert('Please select a valid ZipCode');
+                    return;
+                  }
+
+                try {
+                  const res2 = await fetch('/api/v1/helps'+'?zipcode='+zip.val())
+                  window.mdata = await res2.json();
+                  if (res2.status === 200) {
+                    console.log("Got Map data"+mdata)
+                    // Create markers.
+                    var count = 1;
+                    mdata.forEach(function(help) {
+                      var markerPosition= new google.maps.LatLng(Number(help.geometry.lat),Number(help.geometry.lng))
+                      var marker2 = new google.maps.Marker({
+                        position: markerPosition,
+                        map: map2
+                      });
+                      marker2.setVisible(true)
+                      var contentString = '<div>'+
+                        '<div id="siteNotice">'+
+                        '</div>'+
+                        '<h4 id="firstHeading" class="firstHeading">Help '+count+'</h4>'+
+                        '<div id="bodyContent">'+ help.title +
+                        '</div>'+
+                        '</div>';
+                      var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                      });
+                      infowindow.open(map2, marker2);
+                      if (count === 1) {
+                        map2.setCenter(markerPosition);
+                      }
+                      var addref = count-1;
+                      $('.list-group').append('<a  data-toggle="modal" data-target="#'+help.hid+'" class="list-group-item list-group-item-action">'+count+'. '+help.title+'</a>');
+                      $('body').append('<div class="modal fade" id="'+help.hid+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg" role="document"> <div class="modal-content"><div class="modal-header"><h4 class="modal-title w-100" id="myModalLabel">'+help.title+'</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><p>Discription: '+help.desc+'</p><p>Contact: '+help.phone+'</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button></div></div></div></div>');
+                      console.log("Reached here in init"+help.geometry.lat)
+                      count++;
+                    });
+                  }
+                  if (res2.status === 403) {
+                    throw Error('No Help registered on this ZipCode yet, be the first one to do it.');
+
+                  }
+                  if (res2.status === 400) {
+                    throw Error('Database Error');
+                  }
+                  if (res2.status === 500) {
+                    throw Error('Server Error!');
+                  }
+                } catch (err) {
+                  alert(err);
+                  return;
+                }
+            });
+          });
+                    
+          var map = new google.maps.Map(
+              document.getElementById('map'),
+              {center: {lat: -33.8688, lng: 151.2195}, zoom: 13});
+
+          var input = document.getElementById('pac-input');
+
+          var autocomplete = new google.maps.places.Autocomplete(input);
+
+          autocomplete.bindTo('bounds', map);
+
+          // Specify just the place data fields that you need.
+          autocomplete.setFields(['place_id', 'geometry', 'name', 'formatted_address','address_components']);
+
+          map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+          var infowindow = new google.maps.InfoWindow();
+          var infowindowContent = document.getElementById('infowindow-content');
+          infowindow.setContent(infowindowContent);
+
+          var geocoder = new google.maps.Geocoder;
+
+          var marker = new google.maps.Marker({map: map});
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+
+          autocomplete.addListener('place_changed', function() {
+            infowindow.close();
+            place = autocomplete.getPlace();
+
+            if (!place.place_id) {
+              return;
+            }
+            geocoder.geocode({'placeId': place.place_id}, function(results, status) {
+              if (status !== 'OK') {
+                window.alert('Geocoder failed due to: ' + status);
+                return;
+              }
+
+              map.setZoom(11);
+              map.setCenter(results[0].geometry.location);
+
+              // Set the position of the marker using the place ID and location.
+              marker.setPlace(
+                  {placeId: place.place_id, location: results[0].geometry.location});
+
+              marker.setVisible(true);
+
+              infowindowContent.children['place-name'].textContent = place.name;
+              infowindowContent.children['place-id'].textContent = place.place_id;
+              infowindowContent.children['place-address'].textContent =
+                  results[0].formatted_address;
+              console.log(results[0])
+              addressData = results[0]
+              infowindow.open(map, marker);
+            });
+          });
+        }
+        function myFunction() {
+          $('[data-toggle="tooltip"]').tooltip('hide')
+        }
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+          infoWindow.setPosition(pos);
+          infoWindow.setContent(browserHasGeolocation ?
+                                'Error: The Geolocation service failed.' :
+                                'Error: Your browser doesn\'t support geolocation.');
+          infoWindow.open(map);
+        }
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip();
+          $('[data-toggle="tooltip"]').on('shown.bs.tooltip', function () {
+            window.setTimeout(myFunction, 13000)
+          })
+        });
+        function abc(data) {
+          console.log(data);
+        }
+            
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8xgkTfmx0rHJART7VXcP35QJMvklO4f4&callback=initMap&libraries=places" async defer></script>
+
+</body>
+
+</html>

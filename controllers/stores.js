@@ -1,4 +1,4 @@
-const db  = require('../models/store');
+const db  = require('../../models/store');
 
 
 

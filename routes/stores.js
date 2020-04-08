@@ -1,5 +1,5 @@
 const express = require('express');
-const { getHelp, addHelp } = require('../controllers/stores');
+const { getHelp, addHelp } = require('../../controllers/stores');
 
 const router = express.Router();
 

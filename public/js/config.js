@@ -13,17 +13,17 @@
  */
 
 var config = {
-  apiKey: "AIzaSyDO6uS22dFOm7tlrtaWEPkIibmGzH7bVTo",
-  authDomain: "helpnearme.firebaseapp.com",
-  databaseURL: "https://helpnearme.firebaseio.com",
-  projectId: "helpnearme",
-  storageBucket: "helpnearme.appspot.com",
-  messagingSenderId: "354683853934",
-  appId: "1:354683853934:web:df5356b7b283a43cf41a7f",
-  measurementId: "G-PCG6HNL1MJ"
+  apiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  authDomain: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  databaseURL: "xxxxxxxxxxxxxxxxxxxxxxxx",
+  projectId: "xxxxxxxxxxxxx",
+  storageBucket: "xxxxxxxxxxxxxxxxxx",
+  messagingSenderId: "xxxxxxxxxxxxxxx",
+  appId: "xxxxxxxxxxxxxxxxxxxxxxx",
+  measurementId: "xxxxxxxxxxxxxxxxxx"
 };
 firebase.initializeApp(config);
 
 // Google OAuth Client ID, needed to support One-tap sign-up.
 // Set to null if One-tap sign-up is not supported.
-var CLIENT_ID = "1:354683853934:web:df5356b7b283a43cf41a7f";
+var CLIENT_ID = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx";

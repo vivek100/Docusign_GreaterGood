@@ -1,10 +1,10 @@
-# Store Locator
+# Docusign with Sevabhava
 
-> Node/Express/Mongo API with GeoJSON location field for store locations. Simple vanilla JS frontend using the Mapbox Library
+> Node/Express/ API with Docusign API 
 
 ## Quick Start
 
-Add your MONGO_URI and GEOCODER_API_KEY to the "config/config.env" file.
+Add your Firebase and Docusign keys to the "config/config.env" file.
 
 ```bash
 # Install dependencies
@@ -15,9 +15,5 @@ npm run dev (nodemon)
 or
 npm start
 
-# Routes
-GET    /api/v1/stores # Get Stores
 
-POST   /api/v1/stores # Add Store
-body { storeId: "0001", address: "10 main st Boston MA" }
 ```

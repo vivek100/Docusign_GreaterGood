@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SevaBhava</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+  <!-- Firebase Login logic-->
+      <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+  
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+  
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+  
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+  <!-- MDBootstrap Datatables  -->
+  <link href="assets/css/addons/datatables.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+
+
+      .controls {
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        height: 29px;
+        margin-left: 17px;
+        margin-top: 10px;
+        outline: none;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 250px;
+      }
+
+      .controls:focus {
+        border-color: #4d90fe;
+      }
+      .maptitle {
+        font-weight: bold;
+      }
+      #infowindow-content #einfowindow-content {
+        display: none;
+      }
+      #map #infowindow-content #einfowindow-content {
+        display: block;
+      }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: Appland - v2.0.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-app-landing-page-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex">
+
+      <div class="logo mr-auto">
+        <!-- <h1 class="text-light"><a href="index.html">SevaBhava</a></h1>-->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="#header"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <!--<li class="active"><a href="#header">Home</a></li>-->
+          <li class="get-started" ><a href="#header" id="signin" data-toggle="modal"data-target="#elegantModalForm">Sign in/Sign Up</a></li>
+          <!-- <li><a href="#contact" id='singup'>Sign Up</a></li> -->
+          <li class="get-started" ><a href="#gallery" id="profile" style="display: none"></a></li>
+          <li class="get-started" ><a id="signout" style="display: none">Sign Out</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+        <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" >
+          <thead>
+            <tr>
+              <th class="th-sm">Type
+              </th>
+              <th class="th-sm">Name
+              </th>
+              <th class="th-sm">Bio
+              </th>
+              <th class="th-sm">Email
+                </th>
+              <th class="th-sm">Photo
+              </th>
+              <th class="th-sm">Phone
+              </th>
+              <th class="th-sm">Verification Status
+              </th>
+            </tr>
+          </thead>
+          <tbody id="userProfiles">
+
+          </tbody>
+        </table>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact" data-aos="fade-up">
+            <h3>SevaBhava</h3>
+            <p>
+              Vijaygram Colony <br>
+              Chhindwara, 480108<br>
+              India <br><br>
+              <strong>Email:</strong>admin@sevabhava.in<br>
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="100">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#header">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#details">Register Your Help</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="300">
+            <h4>Our Social Networks</h4>
+            <p>Connect us with here</p>
+            <div class="social-links mt-3">
+              <a href="https://www.facebook.com/pg/sevabhavIN" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://www.instagram.com/sevabhava.in/" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="https://linkedin.com/company/sevabhava" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>SevaBhava</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-app-landing-page-template/ -->
+        Template by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+  <!-- Login Code-->
+<!-- Modal -->
+<div class="modal fade" id="elegantModalForm" tabindex="-1" style="z-index: 10000;" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Log in /Sign Up</h4>
+          <button type="button" id="loginClose" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+            <div id="firebaseui-spa">
+                <div id="firebaseui-container"></div>
+              </div>
+  
+        </div>
+  
+      </div>
+    </div>
+</div>
+<!-- Modal -->
+<!-- Example Help -->
+<div class="modal fade" id="exHelp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-lg" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header" style="background: #ffebee">
+        <i class="fas fa-paw fa-2x red darken-2 z-depth-1 p-2 rounded text-white"></i>
+        <h4 class="modal-title w-100 font-weight-bold" style="padding-left: 5px;" id="mTitle">Helping the stray dogs in Vijaygram Colony</h4>
+      </div>
+      <div class="modal-body" style="background: #fffef1">
+            <!-- Plan and who -->
+            <div class="row text-center">
+              <div class="col-md-6 mb-4">
+                  <div class="card" >
+                      <div class="card-body">
+                        <div>
+                          <h4 class="font-weight-bold mb-2">What is the plan?</h4>
+                          <hr style="margin: 0;">
+                          <p class="text-muted mb-0 mt-2">
+                              I plan to help the strays by feeding them every morning and evening.
+                          </p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                  <div class="card" >
+                      <div class="card-body">
+                        <div>
+                          <h4 class="font-weight-bold mb-2">Who will benefit?</h4>
+                          <hr style="margin: 0;">
+                          <p class="text-muted mb-0 mt-2">
+                              The strays near the two municipality dumpsters near Vijaygram Colony and also the cows.
+                          </p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <!-- Support and links -->
+            <div class="row text-center">
+            <div class="col-md-12 mb-4">
+            
+            <div class="card" >
+              <div class="card-body">
+                  <!-- Section heading -->
+                  <h4 class="font-weight-bold mb-2">Support Needed</h4>      
+                  <hr style="margin: 0;" class="mb-3">    
+                  <!-- Grid row -->
+                  <div class="row">
+              
+                    <!-- Grid column -->
+                    <div class="col-md-4 mb-2">
+                      <i class="fas fa-rupee-sign  fa-2x green darken-2 z-depth-1 p-2 rounded text-white" style="width: 56px"></i>
+                      <h5 class="my-3">For Money Donation</h5>
+                      <a type="button" href="#" class="btn btn-outline-default btn-rounded waves-effect">Donate Here</a>
+                      <hr style="margin-bottom: 0;margin-top: 5px">   
+                    </div>
+                    <!-- Grid column -->
+              
+                    <!-- Grid column -->
+                    <div class="col-md-4 mb-2">
+                      <i class="fas fa-shopping-bag  fa-2x black darken-2 z-depth-1 p-2 rounded text-white" style="width: 56px"></i>
+                      <h5 class="my-3">For Item Donation</h5>
+                      <button type="button" id="phone" data-clipboard-text="9999999999" class="btn btn-outline-info btn-rounded  waves-effect"><i class="fas fa-phone mr-2"
+                        aria-hidden="true"></i>+91-9999999999</button>
+
+                      <hr style="margin-bottom: 0;margin-top: 5px">  
+                    </div>
+                    <!-- Grid column -->
+              
+                    <!-- Grid column -->
+                    <div class="col-md-4 mb-2" >
+                      <i class="fas fa-hands-helping  fa-2x blue darken-2 z-depth-1 p-2 rounded text-white" ></i>
+                      <h5 class="my-3">For Volunteer Support</h5>
+                      <a href="#" type="button" class="btn btn-md btn-fb" style="background-color: #3b5998;color: #fff;"><i class="fab fa-facebook-f pr-1"></i> Join FB Group</a>
+                      <a href="#" type="button" class="btn btn-md btn-fb" style="background-color: #25d366 ;color: #fff;"><i class="fab fa-whatsapp pr-1"></i> Join WhatsApp Group</a>
+                      
+                      <hr style="margin-bottom: 0;margin-top: 5px">  
+                    </div>
+                    <!-- Grid column -->
+              
+                  </div>
+                  <!-- Grid row -->
+                </div>  
+              </div>
+            </div>
+            </div>
+            <!-- Time Line -->
+            <div class="row text-center">
+                <div class="col-md-6 mb-4">
+                    <div class="card" >
+                        <div class="card-body">
+                          <div>
+                              <h4 class="font-weight-bold mb-2">Created on:</h4>
+                            <hr style="margin: 0;">
+                            <h5 class="font-weight-bold mt-2">Apr 14 2020</h5>
+                            <h6 class="font-weight-bold mt-2">Ends in 15 days</h6>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card" >
+                        <div class="card-body">
+                          <div>
+                            <h4 class="font-weight-bold mb-2">Created by:</h4>
+                            <hr style="margin: 0;">
+                            <h5 class="font-weight-bold mt-2">Vivek Shukla</h5>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+      </div>
+      <div class="modal-footer flex-center">
+        <div class="row d-flex justify-content-center align-items-center">
+            <a type="button" class="btn btn-primary waves-effect" data-dismiss="modal">CLOSE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Actual Help -->
+<div class="modal fade" id="actHelp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-lg" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header" style="background: #e8ecf5;color:black">
+        <i id='mIcon' class=" fa-2x z-depth-1 p-2 rounded text-white"></i>
+        <h4 class="modal-title w-100" style="padding-left: 10px;" id="mTitle"></h4>
+      </div>
+      <div class="modal-body" style="background: #f3f3f3">
+            <!-- Plan and who -->
+            <div class="row text-center">
+              <div class="col-md-6 mb-4">
+                  <div class="card" >
+                      <div class="card-body">
+                        <div>
+                          <h4 class="mb-2" id="showplan" style="color:black">What is the plan?</h4>
+                          <hr style="margin: 0;">
+                          <h6 id='mPlan' class="text-muted mb-0 mt-2">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                          </h6>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                  <div class="card" >
+                      <div class="card-body">
+                        <div>
+                          <h4 class="mb-2" id="showbenefit" style="color:black">Who will benefit?</h4>
+                          <hr style="margin: 0;">
+                          <h6 id='mBenefit' class="text-muted mb-0 mt-2">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                          </h6>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <!-- Support and links -->
+            <div class="row text-center">
+            <div class="col-md-12 mb-4">
+            
+            <div class="card" >
+              <div class="card-body">
+                  <!-- Section heading -->
+                  <h4 class=" mb-2" style="color:black">Support Needed</h4>      
+                  
+                  <hr style="margin: 0;" class="mb-2">    
+                  <h6 id="mSuppDetails" class=" mb-2"></h6>
+                  <h6 class=" mb-2">Click on the button below to join the initiative, this will send us your contact details and we will contact you for any support needed.</h6>  
+                  <button type="button" onclick="postJusers()" id="mJoin" class="btn btn-info btn-rounded waves-effect" style="background-color: #3b5998;color: #fff;">Join the initiative</button>
+                  <h6 class=" mb-2"><span id="joinedUsersNum" style="font-size: small;background: darkgreen" class="badge"></span></h6>
+                  <hr class="mb-2 mt-2">
+                  <!-- Grid row -->
+                  <div class="row">
+              
+                    <!-- Grid column -->
+                    <div class="col-md-12 mb-2">
+                      <h6><i class="fas fa-rupee-sign fa-1x  text-grey"></i> For Money Donation: <a type="button" id='mDonate' target="_blank" class="btn btn-outline-default btn-rounded waves-effect mt-2">Donate Here</a></h6>
+                      <hr style="margin: 0;" class="mb-2 mt-3">
+                    </div>
+                    
+                    <!-- Grid column -->
+                  </div>
+                  <!-- Grid row -->
+                  <div class="row">
+              
+                    <!-- Grid column -->
+                    <div class="col-md-12 mb-2">
+                      <h6><i class="fas fa-hands-helping fa-1x  text-grey"></i> For Item Donation and Volunteer support:</h6>
+                      <a type="button" class="btn btn-md waves-effect mt-1" id="mPhone" style="background-color: #626b8c;color: #fff;"></a>
+                      <a type="button" target="_blank" class="btn btn-md waves-effect mt-1" id="mUrl" style="background-color: #628c77;color: #fff;"><i class="fas fa-globe pr-1"></i>Website</a>
+                      <a type="button" target="_blank" class="btn btn-md waves-effect mt-1" id="mEmail" style="background-color: #c03d3d;color: #fff;"><i class="fas fa-envelope pr-1"></i>Email</a>
+                      <a id='mFB' type="button" target="_blank" class="btn btn-md btn-fb" style="background-color: #3b5998;color: #fff;"><i class="fab fa-facebook-f pr-1"></i> Join FB Group</a>
+                      <a id='mWhatsapp' type="button" target="_blank" class="btn btn-md btn-fb" style="background-color: #25d366 ;color: #fff;"><i class="fab fa-whatsapp pr-1"></i> Join WhatsApp Group</a>
+                      <hr style="margin-bottom: 0;margin-top: 5px">  
+                    </div>
+                    <!-- Grid column -->
+                  </div>      
+                  <!-- Grid row -->
+                </div>  
+              </div>
+            </div>
+            </div>
+            <!-- Time Line -->
+            <div class="row text-center">
+                <div class="col-md-6 mb-4">
+                    <div class="card" >
+                        <div class="card-body">
+                          <div>
+                              <h4 id='mDate' class="mb-2" style="color:black">Started on: </h4>
+                            <hr style="margin: 0;">
+                            <h6 id='mDays' class=" mt-2"></h6>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card" >
+                        <div class="card-body">
+                          <div>
+                            <h4 class="mb-2" style="color:black">Created by:</h4>
+                            <hr style="margin: 0;">
+                            <a id="mProfileLink" target="_blank"><u><h6 id='mName' class="mt-2"></h6></u></a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            <!-- Share link -->
+            <div class="row text-center">
+              <div class="col-md-12 mb-4">
+                  <div class="card" >
+                      <div class="card-body">
+                        <div>
+                            <h4 class="mb-2" style="color:black">Share the initiative with others:</h4>
+                          <hr style="margin: 0;">
+                          <div class="social-links mt-2">
+                              <a id='kFB' href="https://www.facebook.com/sharer/sharer.php?u=http://nameless-beach-27535.herokuapp.com/&quote=nice" type="button" target="_blank" class="btn btn-md btn-fb" style="background-color: #3b5998;color: #fff;"><i class="fab fa-facebook-f fa-2x pr-1"></i></a>
+                              <a id='kWhatsapp' href="https://web.whatsapp.com/send?l=en&text=asd" type="button" target="_blank" class="btn btn-md btn-fb" style="background-color: #25d366 ;color: #fff;"><i class="fab fa-whatsapp fa-2x pr-1"></i></a>
+                              <a id='kCopy' onclick="copyText('#kCopy')" type="button" class="btn btn-md btn-fb" style=" background: white;"><i style=" color:#ccc" class="fas fa-copy fa-2x pr-1"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+      </div>
+      <div class="modal-footer flex-center" style="background: #e8ecf5">
+        <div class="row d-flex justify-content-center align-items-center">
+            <a type="button" class="btn btn-primary waves-effect" data-dismiss="modal">CLOSE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Sign Up -->
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Log in /Sign Up</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+          <div id="firebaseui-spa">
+              <div id="firebaseui-container"></div>
+            </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Modal: startup-->
+<div class="modal fade " id="modalDiscount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+<div class="modal-dialog modal-side modal-bottom-right modal-notify modal-success" role="document">
+  <!--Content-->
+  <div class="modal-content">
+    <!--Header-->
+    <div class="modal-header">
+      <p class="heading">Welcome to 
+        <strong>SevaBhava</strong>
+      </p>
+
+      <button type="button" id="welcomeClose" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" class="white-text">&times;</span>
+      </button>
+    </div>
+
+    <!--Body-->
+    <div class="modal-body">
+
+      <div class="row">
+
+        <div class="col-12">
+          <p>We see a lot of amazing people taking up initiatives to help unorganized workers, migrant workers, families living in slums, stray animals through various means and resources. These people often run short of support as not everyone can generate awareness about all the social work they are doing.
+              </p>
+          <p>
+            <strong>This led to a thought on why not create a platform where people can find all the social work happening in their area on a map and connect with them.
+              <u>SevaBhava is a platform just made for that</u>.</strong>
+          </p>
+          <h2>
+            <small><span id="StartupMessage" style="font-size: small;" class="badge"> Search Pune and click on the help to see how it works.</span></small>
+          </h2>
+
+        </div>
+      </div>
+    </div>
+
+    <!--Footer-->
+    <div class="modal-footer flex-center">
+      <a class="btn btn-success" data-toggle="modal" data-dismiss="modal" data-target="#elegantModalForm" >Sign Up now
+        <i class="far fa-gem ml-1 white-text"></i>
+      </a>
+      <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">No, thanks</a>
+    </div>
+  </div>
+  <!--/.Content-->
+</div>
+</div>
+<!-- Error message modal -->
+<div class="modal fade top" id="frameModalerror" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Add class .modal-frame and then add class .modal-bottom (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-frame modal-top" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center align-items-center">
+
+          <p id="errorMessage"  class="pt-3 pr-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nisi quo
+            provident fugiat reprehenderit nostrum
+            quos..
+          </p>
+
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Success message modal -->
+ <div class="modal fade" id="frameModalsuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog modal-notify modal-success" role="document">
+     <!--Content-->
+     <div class="modal-content">
+       <!--Header-->
+       <div class="modal-header">
+         <p id="successMessage"class="heading lead">Your Bio and Phonenumber is updated!</p>
+
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true" class="white-text">&times;</span>
+         </button>
+       </div>
+
+       <!--Body-->
+       <div class="modal-body">
+         <div class="text-center">
+           <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+         </div>
+       </div>
+
+       <!--Footer-->
+       <div class="modal-footer justify-content-center"><a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal" >Close</a>
+       </div>
+     </div>
+     <!--/.Content-->
+   </div>
+ </div>
+
+ <!-- Success normal message modal -->
+ <div class="modal fade" id="framenormalsuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog modal-notify modal-success" role="document">
+     <!--Content-->
+     <div class="modal-content">
+       <!--Header-->
+       <div class="modal-header">
+         <p id="successnormalMessage"class="heading lead">Your Bio and Phonenumber is updated!</p>
+
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true" class="white-text">&times;</span>
+         </button>
+       </div>
+
+       <!--Body-->
+       <div class="modal-body">
+         <div class="text-center">
+           <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+         </div>
+       </div>
+
+       <!--Footer-->
+       <div class="modal-footer justify-content-center"><a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal" >Close</a>
+       </div>
+     </div>
+     <!--/.Content-->
+   </div>
+ </div>
+
+<!-- New help created success modal -->
+<div class="modal fade" id="frameHelpsuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p id="successhelpMessage"class="heading lead">Help successfully Created!</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>Share the initiative with others:</p>
+          <div class="social-links mt-2">
+              <a id='hFB' href="https://www.facebook.com/sharer/sharer.php?u=http://nameless-beach-27535.herokuapp.com/&quote=nice" type="button" target="_blank" class="btn btn-md btn-fb" style="background-color: #3b5998;color: #fff;"><i class="fab fa-facebook-f fa-2x pr-1"></i></a>
+              <a id='hWhatsapp' href="https://web.whatsapp.com/send?l=en&text=asd" type="button" target="_blank" class="btn btn-md btn-fb" style="background-color: #25d366 ;color: #fff;"><i class="fab fa-whatsapp fa-2x pr-1"></i></a>
+              <a id='hCopy' onclick="copyText('#hCopy')" type="button" class="btn btn-md btn-fb" style=" background: white;"><i style=" color:#ccc" class="fas fa-copy fa-2x pr-1"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center"><a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal" >Close</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+  
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+  
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/js/mdb.min.js"></script>
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="js/app.js"></script>
+  <!-- MDBootstrap Datatables  -->
+  <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+  <!-- Google Maps-->
+     <script>
+        var map2;
+        $('#Searchtype').hide();
+        $('#modalDiscount').modal('show');
+        var isMobile = false; //initiate as false
+        // device detection
+        if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
+            || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) { 
+            isMobile = true;
+        }
+
+        $(document).ready(async function () {
+          try {
+            const res2 = await fetch('/api/v1/updates')
+            const data = await res2.json();
+            if (res2.status === 200) {
+              data.forEach(function(user){
+                var verifyString;
+                if (user.isVerified === 'pending') {
+                  verifyString = user.isVerified+'</br><a class="verify" data-uid="'+user.uid+'"><u>Verify this user.</u></a>'
+                } else {
+                  verifyString = user.isVerified
+                }
+                var tablestring ='<tr>'+
+                '<td>'+user.accountType+'</td>'+
+                '<td><a href="'+user.fprofileUrl+'" target="_blank"><u>'+user.name+'</u></a></td>'+
+                '<td>'+user.userBio+'</td>'+
+                '<td>'+user.email+'</td>'+
+                '<td> <img src="'+user.photoURL+'"alt="thumbnail" class="img-thumbnail" style="width: 90px;display: block;margin-left: auto;margin-right: auto;">'+
+                '<td>'+user.phoneNumber+'</td>'+
+                '<td>'+verifyString+'</td>'+
+                '</tr>'
+                $("#userProfiles").append(tablestring);
+           
+              });
+              $('.verify').on('click',async function(e) {
+                    console.log( $(this).data('uid'))
+                    const sendBody = {
+                      uid : $(this).data('uid')
+                    };
+
+                    try {
+                      const res = await fetch('/api/v1/verify', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(sendBody)
+                      });
+
+                      if (res.status === 400) {
+                        $('#loader').hide();
+                        showError('Database error. Please try again!');
+                      }
+                      if (res.status === 500) {
+                        $('#loader').hide();
+                        showError('Server Error!');
+                      }
+                      $('#loader').hide();
+                      showSuccess('User Verified');
+                    } catch (err) {
+                      showError(err);
+                      return;
+                    }
+                });
+ 
+              $('#dtBasicExample').DataTable();
+              $('.dataTables_length').addClass('bs-select');
+              $('.verify').on('click',async function(e) {
+                    console.log( $(this).data('uid'))
+                    const sendBody = {
+                      uid : $(this).data('uid')
+                    };
+
+                    try {
+                      const res = await fetch('/api/v1/verify', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(sendBody)
+                      });
+
+                      if (res.status === 400) {
+                        $('#loader').hide();
+                        showError('Database error. Please try again!');
+                      }
+                      if (res.status === 500) {
+                        $('#loader').hide();
+                        showError('Server Error!');
+                      }
+                      $('#loader').hide();
+                      showSuccess('User Verified');
+                    } catch (err) {
+                      showError(err);
+                      return;
+                    }
+              });
+            }
+            if (res2.status === 403) {
+              showError('Database Error');
+
+            }
+            if (res2.status === 400) {
+              showError('Database Error');
+              return;
+            }
+            if (res2.status === 500) {
+              showError('Server Error!');
+              return;
+            }
+          } catch (err) {
+            console.log(err)
+            showError(err);
+            return;
+          }
+        });
+        function showError(data) {
+          $('#errorMessage').text(data);
+          $('#frameModalerror').modal('show');
+        }
+        $('#frameModalsuccess').on('hidden.bs.modal', function (event) {
+            location.reload();
+        });
+
+        function showSuccess(data) {
+          $('#successMessage').text(data);
+          $('#frameModalsuccess').modal('show');
+        }
+
+          //# sourceURL=somename.js
+
+    </script>
+
+</body>
+
+</html>

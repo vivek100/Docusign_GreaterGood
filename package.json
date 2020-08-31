@@ -1,7 +1,7 @@
 {
   "name": "store_locator_api",
   "version": "1.0.0",
-  "description": "",
+  "description": "> Node/Express/Mongo API with GeoJSON location field for store locations. Simple vanilla JS frontend using the Mapbox Library",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,13 +11,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "clipboard": "^2.0.6",
     "cors": "^2.8.5",
+    "docusign-esign": "^5.6.0",
     "dotenv": "^8.2.0",
+    "email-templates": "^7.0.4",
     "express": "^4.17.1",
     "firebase": "^7.13.2",
     "firebase-admin": "^8.10.0",
+    "fs": "0.0.1-security",
+    "moment": "^2.27.0",
     "mongoose": "^5.8.3",
-    "node-geocoder": "^3.25.0"
+    "node-geocoder": "^3.25.0",
+    "nodemailer": "^6.4.6",
+    "xlsx": "^0.15.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

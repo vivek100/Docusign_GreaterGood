@@ -1,4 +1,6 @@
-const db  = require('/app/models/store.js');
+const db  = require('../models/Store');
+const mailFunctions = require('../models/mailer');
+
 
 
 
@@ -36,7 +38,10 @@ exports.updateUser = async (req, res, next) => {
     let docRef = db.collection('users').doc(req.body.uid);
     let setAda = docRef.update({
        userBio: req.body.userBio,
-       phoneNumber: req.body.phoneNumber
+       phoneNumber: req.body.phoneNumber,
+       accountType: req.body.accountType,
+       photoURL: req.body.photoURL,
+       fprofileUrl: req.body.fprofileUrl
      }).then(function() {
         console.error("1");
         return res.status(201).json({
@@ -47,10 +52,20 @@ exports.updateUser = async (req, res, next) => {
         if (error.code === 5) {
           docRef.set({
             userBio: req.body.userBio,
-            phoneNumber: req.body.phoneNumber
+            phoneNumber: req.body.phoneNumber,
+            accountType: req.body.accountType,
+            photoURL: req.body.photoURL,
+            fprofileUrl: req.body.fprofileUrl,
+            createdHids:[],
+            joinedHids:[],
+            isVerified: 'pending',
+            name: req.body.name,
+            email: req.body.email,
+            uid : req.body.uid
           }).then(function() {
               // Update successful.
                 console.error("3");
+                mailFunctions.sendWelcomeEmail(req.body.name,req.body.email);
                 return res.status(201).json({
                 success: true
                 });
